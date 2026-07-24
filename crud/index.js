@@ -80,7 +80,6 @@ app.get("/get-student",async (req,res) => {
 app.delete("/delete-student/:id",async (req,res) => {
     try {
         const {id} = req.params
-        
         const student =  await Student.findByIdAndDelete(id)
         if(!student){
             return res.status(400).json({
@@ -91,8 +90,8 @@ app.delete("/delete-student/:id",async (req,res) => {
         }
         return res.status(200).json({
             success:true,
-            message:"student delete success",
-        
+            message:"student delete success"
+            
         })
     } catch (error) {
         console.log(error)
@@ -106,19 +105,19 @@ app.delete("/delete-student/:id",async (req,res) => {
 app.put("/update-student/:id",async (req,res) => {
     try {
         const {id} = req.params
-        
         const student =  await Student.findByIdAndUpdate(id,req.body)
         if(!student){
             return res.status(400).json({
                 success:false,
-                message:"student delete failed"
+                message:"student update failed"
             })
 
         }
         return res.status(200).json({
             success:true,
             message:"student update success",
-        
+            student
+            
         })
     } catch (error) {
         console.log(error)
@@ -128,6 +127,7 @@ app.put("/update-student/:id",async (req,res) => {
         })
     }
 })
+
 
 
 app.listen(30,() => console.log("server run"))
